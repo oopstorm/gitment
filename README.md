@@ -81,7 +81,7 @@ gitment.render('comments')
 
 ### 4. Initialize Your Comments
 
-After the page is published, you should visit your page, login with your GitHub account(make sure you're repo's owner), and click the initialize button, to create a related issue in your repo.
+After the page is published, you should visit your page, login with your GitHub account(make sure you're repo's owner or admin of organization's repo), and click the initialize button, to create a related issue in your repo.
 After that, others can leave their comments.
    
 ## Methods
@@ -93,6 +93,7 @@ After that, others can leave their comments.
 Type: `object` 
 
 - owner: Your GitHub ID. Required.
+- admin: A string array of organization repository adminstratories, Make sure them are repo's admin or can write into organization's repo.
 - repo: The repository to store your comments. Make sure you're repo's owner. Required.
 - oauth: An object contains your client ID and client secret. Required.
     - client_id: GitHub client ID. Required.
