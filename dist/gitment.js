@@ -239,6 +239,7 @@ var Gitment = function () {
       var _this7 = this;
 
       var id = this.id,
+          admin = this.admin,
           owner = this.owner,
           repo = this.repo;
 
