@@ -183,7 +183,7 @@ class Gitment {
   }
 
   loadMeta() {
-    const { id, owner, repo } = this
+    const { id, admin, owner, repo } = this
     return http.get(`/repos/${owner}/${repo}/issues`, {
         labels: id,
       })
