@@ -243,9 +243,18 @@ var Gitment = function () {
           repo = this.repo;
 
       return _utils.http.get('/repos/' + owner + '/' + repo + '/issues', {
-        creator: owner,
         labels: id
       }).then(function (issues) {
+        if (issues.length) {
+          var allowed = (admin || [owner]).map(function (x) {
+            return x.toLowerCase();
+          });
+          issues = issues.filter(function (issue) {
+            return ~allowed.indexOf(issue.user.login.toLowerCase());
+          }).sort(function (left, right) {
+            return new Date(left.created_at) - new Date(right.created_at);
+          });
+        }
         if (!issues.length) return Promise.reject(_constants.NOT_INITIALIZED_ERROR);
         _this7.state.meta = issues[0];
         return issues[0];
