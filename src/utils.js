@@ -66,7 +66,11 @@ function ajaxFactory(method) {
     })
     req.open(method, url, true)
 
-    req.setRequestHeader('Accept', 'application/vnd.github.squirrel-girl-preview, application/vnd.github.html+json')
+    if (apiPath === "https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token") {
+      req.setRequestHeader('Accept', 'application/json');
+    } else {
+      req.setRequestHeader('Accept', 'application/vnd.github.squirrel-girl-preview, application/vnd.github.html+json');
+    }
     if (token) {
       req.setRequestHeader('Authorization', `token ${token}`)
     }
