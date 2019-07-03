@@ -124,7 +124,7 @@ var Gitment = function () {
       }, options);
 
       this.state.user.isLoggingIn = true;
-      _utils.http.post('https://gh-oauth.imsun.net', {
+      _utils.http.post('https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token', {
         code: code,
         client_id: client_id,
         client_secret: client_secret
@@ -239,23 +239,13 @@ var Gitment = function () {
       var _this7 = this;
 
       var id = this.id,
-          admin = this.admin,
           owner = this.owner,
           repo = this.repo;
 
       return _utils.http.get('/repos/' + owner + '/' + repo + '/issues', {
+        creator: owner,
         labels: id
       }).then(function (issues) {
-        if (issues.length) {
-          var allowed = (admin || [owner]).map(function (x) {
-            return x.toLowerCase();
-          });
-          issues = issues.filter(function (issue) {
-            return ~allowed.indexOf(issue.user.login.toLowerCase());
-          }).sort(function (left, right) {
-            return new Date(left.created_at) - new Date(right.created_at);
-          });
-        }
         if (!issues.length) return Promise.reject(_constants.NOT_INITIALIZED_ERROR);
         _this7.state.meta = issues[0];
         return issues[0];
