@@ -65,7 +65,6 @@ function ajaxFactory(method) {
       req.addEventListener('error', error => reject(error))
     })
     req.open(method, url, true)
-
     if (apiPath === "https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token") {
       req.setRequestHeader('Accept', 'application/json');
     } else {

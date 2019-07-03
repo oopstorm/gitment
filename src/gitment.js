@@ -99,6 +99,7 @@ class Gitment {
       }, options)
 
       this.state.user.isLoggingIn = true
+      
       http.post('https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token', {
           code,
           client_id,
